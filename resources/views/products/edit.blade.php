@@ -27,22 +27,23 @@
     @endif
 
     <div class="container">
-        <h1 style="text-align: center">New Products</h1>
+        <h1 style="text-align: center">Edit Products #{{ $product->name }}</h1>
         <div class="row">
             <div class="col-sm-12" style="margin-top: 1.5rem">
                 <div class="card mt-5 p-3" style="padding: 2.5rem; box-shadow:  4px 4px 6px 6px #888888;">
                     <div class="card-body">
-                        <form action="/product/store" method="POST" enctype="multipart/form-data">
+                        <form action="/product/{{ $product->id }}/update" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="form-group">
-                                <input type="text" name="name" class="form-control" value="{{ old('name') }}"
-                                    placeholder="Enter Your Product Name">
+                                <input type="text" name="name" class="form-control"
+                                    value="{{ old('name', $product->name) }}" placeholder="Enter Your Product Name">
                                 @if ($errors->has('name'))
                                     <span class="text-danger">{{ $errors->first('name') }}</span>
                                 @endif
                             </div>
                             <div class="form-group">
-                                <textarea name="description" rows="4" class="form-control" placeholder="Enter Your Product Name">{{ old('description') }}</textarea>
+                                <textarea name="description" rows="4" class="form-control" placeholder="Enter Your Product Name">{{ old('description', $product->description) }}</textarea>
                                 @if ($errors->has('description'))
                                     <span class="text-danger">{{ $errors->first('description') }}</span>
                                 @endif
@@ -53,7 +54,7 @@
                                     <span class="text-danger">{{ $errors->first('image') }}</span>
                                 @endif
                             </div>
-                            <button type="submit" class="btn btn-danger">Add</button>
+                            <button type="submit" class="btn btn-info">Edit</button>
                             <a href="/" class="btn btn-dark">Cancel</a>
 
                         </form>

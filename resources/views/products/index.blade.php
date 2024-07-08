@@ -27,7 +27,46 @@
         <div>
             <a href="/product/create" class="btn btn-danger navbar-btn">Add Products</a>
         </div>
+        <div class="container mt-3" style="margin-top: 2rem">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th style="text-align: center">ID</th>
+                        <th style="text-align: center">Product_Name</th>
+                        <th style="text-align: center">Product_Description</th>
+                        <th style="text-align: center">Product_Image</th>
+                        <th style="text-align: center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody style="text-align: center">
+                    @foreach ($products as $item)
+                        <tr>
+                            <td>{{ $loop->index + 1 }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->description }}</td>
+                            <td>
+                                <img src="products/{{ $item->image }}" style="border-radius: 50%" width="50"
+                                    height="50" alt="Product Image">
+                            </td>
+                            <td>
+                                <a href="product/{{ $item->id }}/edit" class="btn btn-info">Edit</a>
+                                {{-- <a href="product/{{$item->id}}/delete" class="btn btn-danger">Delete</a> --}}
+                                <form method="POST" action="product/{{ $item->id }}/delete"
+                                    style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+
+                </tbody>
+            </table>
+        </div>
+
     </div>
+
 </body>
 
 </html>
