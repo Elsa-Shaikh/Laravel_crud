@@ -29,7 +29,8 @@ Route::get('/product/{id}/edit', [ProductController::class,'edit'])->name('produ
 Route::put('/product/{id}/update', [ProductController::class,'update']);
 
 
-// Route::get('/product/{id}/delete', [ProductController::class,'destroy']); //not recommended
+// Route::get('/product/{id}/delete', [ProductController::class,'destroy']); //not recommended way to delete the record
 
 Route::delete('/product/{id}/delete', [ProductController::class,'destroy'])->name('products.destroy');
 
+Route::get('/product/{id}/show', [ProductController::class,'show'])->name('products.show');
